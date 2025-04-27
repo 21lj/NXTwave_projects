@@ -9,7 +9,7 @@ import About from './components/About';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter basename="/NXTwave_projects/plp-app">
+      <BrowserRouter>
         <Header />
         <Routes>
          <Route exact path="/" element={<Home />} />
