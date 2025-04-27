@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/NXTwave_projects/plp-app/static/css/main.b3ff83dd.css",
-    "main.js": "/NXTwave_projects/plp-app/static/js/main.ed67490c.js",
+    "main.js": "/NXTwave_projects/plp-app/static/js/main.ebe5157c.js",
     "static/js/453.91972ab0.chunk.js": "/NXTwave_projects/plp-app/static/js/453.91972ab0.chunk.js",
     "index.html": "/NXTwave_projects/plp-app/index.html",
     "main.b3ff83dd.css.map": "/NXTwave_projects/plp-app/static/css/main.b3ff83dd.css.map",
-    "main.ed67490c.js.map": "/NXTwave_projects/plp-app/static/js/main.ed67490c.js.map",
+    "main.ebe5157c.js.map": "/NXTwave_projects/plp-app/static/js/main.ebe5157c.js.map",
     "453.91972ab0.chunk.js.map": "/NXTwave_projects/plp-app/static/js/453.91972ab0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3ff83dd.css",
-    "static/js/main.ed67490c.js"
+    "static/js/main.ebe5157c.js"
   ]
 }
