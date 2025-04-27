@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM03 - Demo Portfolio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00ff88',
+                        secondary: '#007bff',
+                        dark: '#121212',
+                        darker: '#0a0a0a',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-darker text-white font-sans">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand fw-bold" href="#home">
+                <span class="text-primary">PAOLO</span> MALDINI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" 
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-2 active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-2" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-2" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-2" href="#contact">Contact</a></li>
+                </ul>
+                <div class="d-flex ms-lg-3">
+                    <a href="#contact" class="btn btn-primary rounded-pill px-4 py-2">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2">
+                    <div class="home-content">
+                        <h3 class="text-xl text-primary mb-3">Ciao!</h3>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Paolo Maldini Here</h2>
+                        <div class="typing-container text-2xl md:text-3xl mb-4 h-12">
+                            <h1>I'm a <span id="role" class="font-bold text-primary"></span></h1>
+                        </div>
+                        <p class="text-gray-300 mb-6">
+                            Legendary footballer turned tech enthusiast. With over 1,000 professional matches under my belt, I've transitioned from defending goals to developing solutions. My career taught me discipline, teamwork, and strategy - skills I now apply to coding and development.
+                        </p>
+                        <div class="flex items-center gap-4 mb-6">
+                            <a class="btn btn-primary rounded-pill px-4" onclick="alert('you just Clicked Download CV button, good job')">Download CV</a>
+                            <a href="#portfolio" class="btn btn-outline-light rounded-pill px-4">View Work</a>
+                        </div>
+                        <div class="social-links flex gap-4 text-2xl">
+                            <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 mb-5 mb-lg-0">
+                    <div class="home-img relative">
+                        <img src="https://www.dx84tech.com/wp-content/uploads/2021/06/Paolo-Maldini-512-KONAMI.png" 
+                             alt="Paolo Maldini" 
+                             class="rounded-2xl w-full max-w-md mx-auto shadow-lg shadow-primary/20 hover:shadow-primary/40 transition">
+                        <div class="absolute -bottom-5 -right-5 bg-primary text-darker p-3 rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">25+</div>
+                                <div class="text-sm">Trophies Won</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-dark">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-16">
+                <span class="border-b-4 border-primary pb-2">About Me</span>
+            </h2>
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="about-img relative">
+                        <img src="https://www.dx84tech.com/wp-content/uploads/2021/06/Paolo-Maldini-512-KONAMI.png" 
+                             alt="Paolo Maldini" 
+                             class="rounded-2xl w-full shadow-lg">
+                        <div class="absolute -bottom-5 -left-5 bg-primary text-darker p-4 rounded-xl shadow-lg w-3/4">
+                            <div class="flex items-center gap-3">
+                                <div class="text-4xl">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xl font-bold">5x</div>
+                                    <div class="text-sm">Champions League Winner</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="about-content">
+                        <h3 class="text-2xl text-primary mb-3">Defender Turned Developer</h3>
+                        <p class="text-gray-300 mb-4">
+                            After retiring from professional football in 2009, I discovered a passion for technology and problem-solving. My journey in tech began with analyzing football statistics, which led me to programming and development.
+                        </p>
+                        <p class="text-gray-300 mb-6">
+                            Just as I studied opponents on the pitch, I now analyze problems in code. The same focus and discipline that made me successful in football now drive my development work. I specialize in backend systems, data analysis, and sports-related applications.
+                        </p>
+                        
+                        <div class="row mb-6">
+                            <div class="col-md-6 mb-3">
+                                <div class="bg-darker p-4 rounded-lg h-full">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="text-primary text-xl">
+                                            <i class="fas fa-code"></i>
+                                        </div>
+                                        <h4 class="text-lg font-bold">Tech Skills</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside text-gray-300 text-sm">
+                                        <li>Python & Django</li>
+                                        <li>JavaScript & Node.js</li>
+                                        <li>SQL & Data Analysis</li>
+                                        <li>Sports Analytics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-darker p-4 rounded-lg h-full">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="text-primary text-xl">
+                                            <i class="fas fa-futbol"></i>
+                                        </div>
+                                        <h4 class="text-lg font-bold">Football Legacy</h4>
+                                    </div>
+                                    <ul class="list-disc list-inside text-gray-300 text-sm">
+                                        <li>AC Milan Legend (1984-2009)</li>
+                                        <li>7x Serie A Titles</li>
+                                        <li>5x Champions League Winner</li>
+                                        <li>FIFA 100 Greatest Players</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#portfolio" class="btn btn-primary rounded-pill px-4">View My Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-5">
+                <span class="border-b-4 border-primary pb-2">My Projects</span>
+            </h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+                Combining my football expertise with technical skills to create innovative solutions for sports analytics and beyond.
+            </p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-full bg-dark border-0 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-primary/20 transition">
+                        <div class="card-img-top overflow-hidden">
+                            <img src="https://th.bing.com/th/id/OSK.HEROMa90Nova-7uJ2CFZxI8EZVnCQzbT2ayl-d60mGYLH0Y?rs=1&pid=ImgDetMain" 
+                                 alt="Tic Tac Toe" 
+                                 class="w-full h-48 object-cover hover:scale-105 transition">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-xl font-bold mb-2">Tic Tac Toe AI</h5>
+                            <p class="card-text text-gray-300 mb-4">
+                                A strategic game with unbeatable AI, applying football tactics to game theory.
+                            </p>
+                            <div class="flex gap-2">
+                                <a href="tictactoe21.ccbp.tech" class="btn btn-sm btn-outline-light rounded-pill">Live Demo</a>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-full bg-dark border-0 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-primary/20 transition">
+                        <div class="card-img-top overflow-hidden">
+                            <img src="https://www.scoop.my/canon/uploads/2024/07/Spain-EURO-2024-scaled.jpeg" 
+                                 alt="Euro Shot Map" 
+                                 class="w-full h-48 object-cover hover:scale-105 transition">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-xl font-bold mb-2">Euro Shot Map</h5>
+                            <p class="card-text text-gray-300 mb-4">
+                                Visual analytics platform for football shot data from major tournaments.
+                            </p>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/21lj/python_projects/tree/main/Project0" class="btn btn-sm btn-outline-light rounded-pill">Live Demo</a>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-full bg-dark border-0 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-primary/20 transition">
+                        <div class="card-img-top overflow-hidden">
+                            <img src="https://img.freepik.com/premium-vector/book-pen-cartoon-vector_484148-126.jpg?w=2000" 
+                                 alt="ToDo App" 
+                                 class="w-full h-48 object-cover hover:scale-105 transition">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-xl font-bold mb-2">Training Planner</h5>
+                            <p class="card-text text-gray-300 mb-4">
+                                Task management system adapted from football training schedules.
+                            </p>
+                            <div class="flex gap-2">
+                                <a href="https://ljtodo1.ccbp.tech/" class="btn btn-sm btn-outline-light rounded-pill">Live Demo</a>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-full bg-dark border-0 rounded-xl overflow-hidden hover:shadow-lg hover:shadow-primary/20 transition">
+                        <div class="card-img-top overflow-hidden">
+                            <img src="https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe-720x720.jpg" 
+                                 alt="Food Munch" 
+                                 class="w-full h-48 object-cover hover:scale-105 transition">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-xl font-bold mb-2">Athlete Nutrition</h5>
+                            <p class="card-text text-gray-300 mb-4">
+                                Meal planning app optimized for professional athletes' dietary needs.
+                            </p>
+                            <div class="flex gap-2">
+                                <a href="https://foodmunchbyme23.ccbp.tech/" class="btn btn-sm btn-outline-light rounded-pill">Live Demo</a>
+                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="#" class="btn btn-outline-primary rounded-pill px-4">View All Projects</a>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="py-20 bg-dark">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-5">
+                <span class="border-b-4 border-primary pb-2">Get In Touch</span>
+            </h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+                Whether you're interested in sports tech, want to discuss a project, or just talk football, I'd love to hear from you.
+            </p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-container bg-darker rounded-xl shadow-lg p-6 md:p-8">
+                        <form class="contact-form">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" id="name" name="name" 
+                                               class="form-control bg-dark border-0 py-3 px-4 text-white" 
+                                               placeholder="Your Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" id="email" name="email" 
+                                               class="form-control bg-dark border-0 py-3 px-4 text-white" 
+                                               placeholder="Your Email" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <input type="text" id="subject" name="subject" 
+                                               class="form-control bg-dark border-0 py-3 px-4 text-white" 
+                                               placeholder="Subject" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea id="message" name="message" rows="5" 
+                                                  class="form-control bg-dark border-0 py-3 px-4 text-white" 
+                                                  placeholder="Your Message" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary rounded-pill px-5 py-3">
+                                        Send Message <i class="fas fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="py-10 border-t border-gray-800">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <a href="#" class="text-2xl font-bold text-white mb-4 d-inline-block">
+                        <span class="text-primary">PAOLO</span> MALDINI
+                    </a>
+                    <p class="text-gray-400 mb-5">
+                        From the football pitch to the digital world - bringing the same passion and excellence to technology.
+                    </p>
+                    
+                    <div class="social-links flex justify-center gap-4 text-xl mb-6">
+                        <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    
+                    <div class="text-gray-500 text-sm mb-4">
+                        &copy; 2025 Paolo Maldini. All rights reserved.
+                    </div>
+                    
+                    <a href="#home" class="btn btn-outline-primary rounded-pill px-4">
+                        Back to Top <i class="fas fa-arrow-up ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
