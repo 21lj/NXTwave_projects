@@ -1,18 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // CORS configuration
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://headlinegen.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
+const corsOptions = {
+  origin: 'https://headlinegen.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
