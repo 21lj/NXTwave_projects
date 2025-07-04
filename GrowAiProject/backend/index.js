@@ -1,23 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
-const PORT = process.env.PORT || 3001;
 
+// 1. Nuclear CORS settings
 app.use(cors({
-  origin: '*', // Allow ALL origins (remove this in production)
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['*'], // Allow all headers
-  credentials: true
+  origin: true, // Dynamically allow requesting origin
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
-// 2. Explicit OPTIONS handler
-app.options('*', cors()); // Handle ALL OPTIONS requests
+// 2. Explicit preflight handler
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.status(204).end();
+});
 
-// 3. Add request logging middleware
+// 3. Request logging middleware
 app.use((req, res, next) => {
-  console.log(`Incoming ${req.method} request to ${req.path}`);
-  console.log('Headers:', req.headers);
+  console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
+  console.log('Origin:', req.headers.origin);
   next();
 });
 
