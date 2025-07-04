@@ -4,14 +4,22 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// CORS configuration
-const corsOptions = {
-  origin: 'https://headlinegen.vercel.app',
+app.use(cors({
+  origin: '*', // Allow ALL origins (remove this in production)
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-};
+  allowedHeaders: ['*'], // Allow all headers
+  credentials: true
+}));
 
-app.use(cors(corsOptions));
+// 2. Explicit OPTIONS handler
+app.options('*', cors()); // Handle ALL OPTIONS requests
+
+// 3. Add request logging middleware
+app.use((req, res, next) => {
+  console.log(`Incoming ${req.method} request to ${req.path}`);
+  console.log('Headers:', req.headers);
+  next();
+});
 
 app.use(express.json());
 
