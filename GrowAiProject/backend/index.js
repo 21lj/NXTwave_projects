@@ -2,15 +2,17 @@ const express = require('express')
 const cors = require('cors')
 
 const app=express()
+const PORT = process.env.PORT || 3001;
 // app.use(cors())
 
 app.use(cors({
-  origin: '*', 
+  origin: 'https://headlinegen.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
 }));
 
 app.use(express.json())
 
-const PORT = 3001
 
 const headlines = [
   "Why {name} is {location}'s Top Choice in 2025",
