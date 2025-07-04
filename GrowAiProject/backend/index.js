@@ -5,16 +5,15 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // CORS configuration
-const corsOptions = {
-  origin: 'https://headlinegen.vercel.app',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  optionsSuccessStatus: 200,
-};
-
-// Apply CORS middleware globally
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle all preflight requests
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://headlinegen.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use(express.json());
 
