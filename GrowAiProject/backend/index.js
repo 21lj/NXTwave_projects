@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// CORS configuration
 const corsOptions = {
   origin: 'https://headlinegen.vercel.app',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -11,9 +12,11 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+// Apply CORS middleware globally
 app.use(cors(corsOptions));
-app.use(express.json());
+app.options('*', cors(corsOptions)); // Handle all preflight requests
 
+app.use(express.json());
 
 const headlines = [
   "Why {name} is {location}'s Top Choice in 2025",
@@ -24,27 +27,25 @@ const headlines = [
 ];
 
 app.post('/business-data', (req, res) => {
-    const {name, location}=req.body;
-    const headline = headlines[Math.floor(Math.random() * headlines.length)]
+  const { name, location } = req.body;
+  const headline = headlines[Math.floor(Math.random() * headlines.length)]
     .replace('{name}', name)
-    .replace('{location}', location)
+    .replace('{location}', location);
 
-    res.json({
-        ratings: (Math.random()*1.5 + 3.5).toFixed(1),
-        reviews: Math.floor(Math.random()*100),
-        headline
-    })
-
+  res.json({
+    ratings: (Math.random() * 1.5 + 3.5).toFixed(1),
+    reviews: Math.floor(Math.random() * 100),
+    headline
+  });
 });
 
-app.get('/regenerate-headline', (req, res)=> {
-    const {name, location} = req.query
-    const headline = headlines[Math.floor(Math.random() * headlines.length)]
+app.get('/regenerate-headline', (req, res) => {
+  const { name, location } = req.query;
+  const headline = headlines[Math.floor(Math.random() * headlines.length)]
     .replace('{name}', name)
-    .replace('{location}', location)
+    .replace('{location}', location);
 
-    res.json({headline})
-
+  res.json({ headline });
 });
 
-app.listen(PORT, ()=> console.log("Server is RUNNING!!"))
+app.listen(PORT, () => console.log(`Server is RUNNING on port ${PORT}`));
