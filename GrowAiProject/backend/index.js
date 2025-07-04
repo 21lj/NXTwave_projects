@@ -1,19 +1,18 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
-const app=express()
+const app = express();
 const PORT = process.env.PORT || 3001;
-// app.use(cors())
 
-// app.use(cors({
-//   origin: 'https://headlinegen.vercel.app',
-//   methods: ['GET', 'POST', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type'],
-// }));
-app.use(cors());
-app.options('*', cors());
+const corsOptions = {
+  origin: 'https://headlinegen.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200,
+};
 
-app.use(express.json())
+app.use(cors(corsOptions));
+app.use(express.json());
 
 
 const headlines = [
