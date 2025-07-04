@@ -4,7 +4,8 @@ const DisplayCard = ({data, setBusinessData, setIsLoading}) => {
 
     const regenerateHeadlineFun = async () => {
         setIsLoading(true);
-        const URL = `http://localhost:3001/regenerate-headline?name=${data.name}&location=${data.location}`
+        // const URL = `http://localhost:3001/regenerate-headline?name=${data.name}&location=${data.location}`
+        const URL = `https://headlinegen-backend.onrender.com/regenerate-headline?name=${data.name}&location=${data.location}`
         const res = await fetch(URL)
         const newData = await res.json()
         setBusinessData({...data, headline: newData.headline})

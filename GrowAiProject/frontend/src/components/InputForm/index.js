@@ -8,7 +8,8 @@ const InputForm = ({setBusinessData, setIsLoading}) => {
     const submitFun = async (e) => {
         e.preventDefault()
         setIsLoading(true);
-        const URL = 'http://localhost:3001/business-data'
+        // const URL = 'http://localhost:3001/business-data'
+        const URL = 'https://headlinegen-backend.onrender.com/business-data'
         
         const option = {
             method: 'POST',
