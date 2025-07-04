@@ -1,0 +1,11 @@
+# for test!
+
+POST http://localhost:3001/business-data
+Content-Type: application/json
+
+{
+  "name": "Green Leaf Cafe",
+  "location": "Austin"
+}
+
+GET http://localhost:3001/regenerate-headline?name=Green%20Leaf%20Cafe&location=Austin
