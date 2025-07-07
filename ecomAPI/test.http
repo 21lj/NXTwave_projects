@@ -1,0 +1,103 @@
+# POST http://localhost:5000/api/auth/register
+# Content-Type: application/json
+
+# {
+#   "name": "John Doe",
+#   "email": "john@example.com",
+#   "password": "password123"
+# }
+
+# POST http://localhost:5000/api/auth/register
+# Content-Type: application/json
+
+# {
+#   "name": "Admin",
+#   "email": "admin@example.com",
+#   "password": "********",
+#   "role": "admin"
+# }
+
+# POST http://localhost:5000/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "admin@example.com",
+#   "password": "********"
+# }
+
+
+# POST http://localhost:5000/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "john@example.com",
+#   "password": "password123"
+# }
+
+
+# admin JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhN2EyNGMxNDhkMzNlMmU2NTIxOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MTg2MjMyOSwiZXhwIjoxNzUyNDY3MTI5fQ.tfM3CGn5a3frHj5j_KtAvxP9Q-BWICrpA_jqZR8O2_0
+# John Doe's JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+
+
+# POST http://localhost:5000/api/products
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhN2EyNGMxNDhkMzNlMmU2NTIxOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MTg2MjMyOSwiZXhwIjoxNzUyNDY3MTI5fQ.tfM3CGn5a3frHj5j_KtAvxP9Q-BWICrpA_jqZR8O2_0
+# Content-Type: application/json
+
+# {
+#   "name": "Phone 6G",
+#   "category": "electronics",
+#   "price": 909,
+#   "description": "Android at its peak"
+# }
+
+
+# GET http://localhost:5000/api/products
+
+
+# GET http://localhost:5000/api/products?search=iphone&page=1&limit=5
+
+
+# GET http://localhost:5000/api/cart
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+
+
+
+
+
+# POST http://localhost:5000/api/cart
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+# Content-Type: application/json
+
+# {
+#   "productId": "686b4d084dacb66af012d5bd",
+#   "quantity": 2
+# }
+
+
+
+
+
+
+
+# PUT http://localhost:5000/api/cart/686b4d084dacb66af012d5bd
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+# Content-Type: application/json
+
+# {
+#   "quantity": 1
+# }
+
+
+
+# DELETE http://localhost:5000/api/cart/686b4d084dacb66af012d5bd
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+
+
+
+# POST http://localhost:5000/api/orders
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig
+
+
+
+# GET http://localhost:5000/api/orders
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmFhNzYyNGMxNDhkMzNlMmU2NTIxNiIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1MTg2NDkwMywiZXhwIjoxNzUyNDY5NzAzfQ.Vi5fYo-1CPoQVc8O_EjM4QTJmvWBOyF8VLwQxNck5Ig

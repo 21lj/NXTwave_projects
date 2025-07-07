@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini E-commerce</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🛍️ Mini E-commerce</h1>
+
+    <!-- Auth -->
+    <section id="auth-section">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required minlength="6" />
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <!-- Product List -->
+    <section id="products-section" class="hidden">
+      <h2>Products</h2>
+      <ul id="productList"></ul>
+    </section>
+
+    <!-- Cart -->
+    <section id="cart-section" class="hidden">
+      <h2>Your Cart</h2>
+      <ul id="cartList"></ul>
+      <button onclick="placeOrder()">Place Order</button>
+    </section>
+
+    <!-- Admin Controls -->
+    <section id="admin-section" class="hidden">
+      <h2>Admin: Manage Products</h2>
+      <form id="adminForm">
+        <input type="text" id="prodName" placeholder="Product Name" required />
+        <input type="text" id="prodCat" placeholder="Category" required />
+        <input type="number" id="prodPrice" placeholder="Price" required />
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
