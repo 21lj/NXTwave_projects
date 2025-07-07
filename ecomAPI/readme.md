@@ -33,6 +33,6 @@ This project is a full-stack e-commerce platform built using Node.js, Express, M
 
 - **Backend**: Node.js, Express, MongoDB, Mongoose, JWT, bcrypt, CORS
 - **Frontend**: HTML, CSS, JavaScript (Vanilla)
-- **Deployment Targets**: 
-  - Backend: Render or Railway
-  - Frontend: Vercel
+- **Deployment**: 
+  - [Render](https://ecomapi-3qti.onrender.com/)
+ 
