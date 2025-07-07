@@ -49,3 +49,16 @@ button:hover {
   align-items: center;
   margin-bottom: 1rem;
 }
+#auth-section a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+#auth-section a:hover {
+  text-decoration: underline;
+}
+
+#auth-msg, #register-msg {
+  color: #d32f2f;
+  margin-top: 0.5rem;
+}
