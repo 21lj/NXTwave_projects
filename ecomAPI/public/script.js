@@ -28,7 +28,7 @@ document.getElementById("show-login").addEventListener("click", (e) => {
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const username = document.getElementById("login-username").value;
+  const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
   const msg = document.getElementById("auth-msg");
 
@@ -36,7 +36,7 @@ loginForm.addEventListener("submit", async (e) => {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ email, password })
     });
 
     const data = await response.json();
@@ -56,7 +56,8 @@ loginForm.addEventListener("submit", async (e) => {
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const username = document.getElementById("register-username").value;
+  const name = document.getElementById("register-name").value;
+  const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
   const confirmPassword = document.getElementById("register-confirm-password").value;
   const msg = document.getElementById("register-msg");
@@ -76,7 +77,7 @@ registerForm.addEventListener("submit", async (e) => {
     const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ name, email, password })
     });
 
     const data = await response.json();
@@ -102,7 +103,8 @@ registerForm.addEventListener("submit", async (e) => {
 function handleLoginSuccess(data) {
   localStorage.setItem("token", data.token);
   localStorage.setItem("role", data.role);
-  localStorage.setItem("username", data.username);
+  localStorage.setItem("email", data.email);
+  localStorage.setItem("username", data.name);
 
   authSection.style.display = "none";
   mainSection.style.display = "block";
