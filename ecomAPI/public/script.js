@@ -1,142 +1,145 @@
-const API_URL = "https://ecomapi-3qti.onrender.com/api";
-let token = "";
-let role = "";
-let userId = "";
+const API_URL = "https://ecomapi-3qti.onrender.com/api"; 
 
-const loginForm = document.getElementById("loginForm");
-const emailEl = document.getElementById("email");
-const passwordEl = document.getElementById("password");
-const productList = document.getElementById("productList");
-const cartList = document.getElementById("cartList");
-
-const authSection = document.getElementById("auth-section");
-const productsSection = document.getElementById("products-section");
-const cartSection = document.getElementById("cart-section");
-const adminSection = document.getElementById("admin-section");
-
-const adminForm = document.getElementById("adminForm");
-const prodName = document.getElementById("prodName");
-const prodCat = document.getElementById("prodCat");
-const prodPrice = document.getElementById("prodPrice");
-
-// Login
-loginForm.addEventListener("submit", async (e) => {
+document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = emailEl.value.trim();
-  const password = passwordEl.value;
 
-  if (!email || !password) return alert("Fill all fields");
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+  const msg = document.getElementById("auth-msg");
 
-  const res = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+  try {
+    const loginRes = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-  const data = await res.json();
+    const loginData = await loginRes.json();
 
-  if (res.ok) {
-    token = data.token;
-    role = data.user.role;
-    userId = data.user.id;
-    alert("✅ Login successful");
-    authSection.classList.add("hidden");
-    productsSection.classList.remove("hidden");
-    cartSection.classList.remove("hidden");
-    if (role === "admin") adminSection.classList.remove("hidden");
-    fetchProducts();
-    fetchCart();
-  } else {
-    alert("❌ Login failed");
+    if (loginRes.ok) {
+      handleLoginSuccess(loginData);
+    } else {
+      
+      const registerRes = await fetch(`${API_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const registerData = await registerRes.json();
+
+      if (registerRes.ok) {
+        const autoLoginRes = await fetch(`${API_URL}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const autoLoginData = await autoLoginRes.json();
+
+        if (autoLoginRes.ok) {
+          handleLoginSuccess(autoLoginData);
+        } else {
+          msg.textContent = "Auto-login failed.";
+        }
+      } else {
+        msg.textContent = registerData.message || "Registration failed.";
+      }
+    }
+  } catch (err) {
+    msg.textContent = "Error: " + err.message;
   }
 });
 
-// Fetch Products
-async function fetchProducts() {
+function handleLoginSuccess(data) {
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("role", data.role);
+
+  document.getElementById("auth-section").style.display = "none";
+  document.getElementById("main-section").style.display = "block";
+  document.getElementById("user-role").textContent = data.role;
+
+  if (data.role === "admin") {
+    document.getElementById("admin-section").style.display = "block";
+  }
+
+  loadProducts();
+  loadCart();
+}
+
+function logout() {
+  localStorage.clear();
+  location.reload();
+}
+
+async function loadProducts() {
   const res = await fetch(`${API_URL}/products`);
   const products = await res.json();
-  productList.innerHTML = "";
+  const list = document.getElementById("product-list");
 
-  products.forEach((p) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${p.name} – ₹${p.price}
-      <button onclick="addToCart('${p._id}')">Add</button>
-    `;
-    productList.appendChild(li);
-  });
+  list.innerHTML = products.map(p => `
+    <div>
+      <strong>${p.name}</strong> (${p.category}) - $${p.price}
+      <button onclick="addToCart('${p._id}')">Add to Cart</button>
+    </div>
+  `).join("");
 }
 
-// Add to Cart
 async function addToCart(productId) {
-  const res = await fetch(`${API_URL}/cart`, {
+  await fetch(`${API_URL}/cart`, {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
     },
-    body: JSON.stringify({ productId, quantity: 1 })
+    body: JSON.stringify({ productId })
   });
-  if (res.ok) {
-    alert("✅ Added to cart");
-    fetchCart();
-  } else {
-    alert("❌ Failed to add");
-  }
+  loadCart();
 }
 
-// Fetch Cart
-async function fetchCart() {
+async function loadCart() {
   const res = await fetch(`${API_URL}/cart`, {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
   });
   const cart = await res.json();
-  cartList.innerHTML = "";
+  const list = document.getElementById("cart-list");
 
-  cart.items?.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = `${item.product.name} x ${item.quantity}`;
-    cartList.appendChild(li);
-  });
-}
-
-// Place Order
-async function placeOrder() {
-  const res = await fetch(`${API_URL}/orders`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  if (res.ok) {
-    alert("✅ Order placed!");
-    fetchCart();
-  } else {
-    alert("❌ Failed to order");
+  if (!cart.items || cart.items.length === 0) {
+    list.innerHTML = "<p>Cart is empty</p>";
+    return;
   }
+
+  list.innerHTML = cart.items.map(item => `
+    <div>
+      ${item.product.name} - $${item.product.price} x ${item.quantity}
+    </div>
+  `).join("");
 }
 
-// Admin: Add Product
-adminForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const body = {
-    name: prodName.value,
-    category: prodCat.value,
-    price: parseFloat(prodPrice.value)
-  };
+document.getElementById("place-order-btn").addEventListener("click", async () => {
+  await fetch(`${API_URL}/orders`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+  });
+  alert("Order placed!");
+  loadCart();
+});
 
-  const res = await fetch(`${API_URL}/products`, {
+document.getElementById("add-product-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("product-name").value;
+  const category = document.getElementById("product-category").value;
+  const price = parseFloat(document.getElementById("product-price").value);
+
+  await fetch(`${API_URL}/products`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify({ name, category, price })
   });
 
-  if (res.ok) {
-    alert("✅ Product added");
-    adminForm.reset();
-    fetchProducts();
-  } else {
-    alert("❌ Failed to add");
-  }
+  loadProducts();
+  e.target.reset();
 });
