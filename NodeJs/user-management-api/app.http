@@ -1,0 +1,70 @@
+### Create a new user
+POST http://localhost:3000/create_user
+Content-Type: application/json
+
+{
+  "full_name": "Unknown 12",
+  "mob_num": "+918854367250",
+  "pan_num": "ABCFD3434F",
+  "manager_id": "11111111-1111-1111-1111-111111111111"
+}
+
+### Get all users
+POST http://localhost:3000/get_users
+Content-Type: application/json
+
+{}
+
+### Get user by mobile number
+POST http://localhost:3000/get_users
+Content-Type: application/json
+
+{
+  "mob_num": "8854367250"
+}
+
+### Get user by ID, replace the sample 'user_id'
+POST http://localhost:3000/get_users
+Content-Type: application/json
+
+{
+  "user_id": "33879ba4-6d2f-4989-b87c-e87dfff80c74" 
+}
+
+### Get users by manager ID
+POST http://localhost:3000/get_users
+Content-Type: application/json
+
+{
+  "manager_id": "11111111-1111-1111-1111-111111111111"
+}
+
+### Delete user by ID , replace the sample 'user_id'
+POST http://localhost:3000/delete_user
+Content-Type: application/json
+
+{
+  "user_id": "33879ba4-6d2f-4989-b87c-e87dfff80c74"
+}
+
+### Delete user by mobile number
+POST http://localhost:3000/delete_user
+Content-Type: application/json
+
+{
+  "mob_num": "9954327650"
+}
+
+### Update users , replace the sample 'user_id'
+POST http://localhost:3000/update_user
+Content-Type: application/json
+
+{
+  "user_ids": ["1c71b690-a245-4408-b6cf-d253de4154ec"],
+  "update_data": {
+    "full_name": "Carl Johnson",
+    "mob_num": "+910987654321",
+    "pan_num": "FGHIJ6789K",
+    "manager_id": "22222222-2222-2222-2222-222222222222"
+  }
+}
