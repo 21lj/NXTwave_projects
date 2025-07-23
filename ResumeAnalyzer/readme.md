@@ -50,7 +50,7 @@ This application allows users to upload PDF resumes. It automatically extracts k
 *   **LLM Integration:**
     *   Careful prompt engineering is used to instruct the Google Gemini model to return consistently structured JSON data based on the resume content.
 
-## Examples
+* Sample ScreenShots
 
     Landing Page
     ![landing page](./screenshots/landingPG.png)
