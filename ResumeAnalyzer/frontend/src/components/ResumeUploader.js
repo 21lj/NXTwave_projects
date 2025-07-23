@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import ResumeDetails from './ResumeDetails'; 
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'; 
+const API_BASE_URL = "https://resume-analyzer-ai-j3tz.onrender.com"
 
 const ResumeUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null)

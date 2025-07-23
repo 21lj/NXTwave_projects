@@ -3,7 +3,7 @@ import axios from 'axios'
 import ResumeDetails from './ResumeDetails'
 import './PastResumeTable.css'
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'
+const API_BASE_URL = "https://resume-analyzer-ai-j3tz.onrender.com"
 
 const PastResumesTable = () => {
   const [resumes, setResumes] = useState([])
