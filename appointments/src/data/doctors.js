@@ -1,7 +1,7 @@
 export const doctors = [
   {
     id: 1,
-    name: "Dr. Soumya Koshy",
+    name: "Dr. Elara Philips",
     specialization: "Cardiologist",
     image: "https://randomuser.me/api/portraits/women/45.jpg",
     availability: "Available Today",
@@ -12,11 +12,11 @@ export const doctors = [
       { day: "Thursday", time: "Closed" },
       { day: "Friday", time: "9:00 AM - 4:00 PM" }
     ],
-    bio: "Dr. Soumya has over 12 years of experience in interventional cardiology and is passionate about preventive care."
+    bio: "Dr. Elara has over 12 years of experience in interventional cardiology and is passionate about preventive care."
   },
   {
     id: 2,
-    name: "Dr. Tony Thomas",
+    name: "Dr. Trevor Philips",
     specialization: "Neurologist",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     availability: "Fully Booked",
@@ -31,7 +31,7 @@ export const doctors = [
   },
   {
     id: 3,
-    name: "Dr. Priya Nair",
+    name: "Dr. Lucia Jason",
     specialization: "Pediatrician",
     image: "https://randomuser.me/api/portraits/women/68.jpg",
     availability: "On Leave",
@@ -46,7 +46,7 @@ export const doctors = [
   },
   {
     id: 4,
-    name: "Dr. Vikram Joshi",
+    name: "Dr. Franklin Clinton",
     specialization: "Orthopedic Surgeon",
     image: "https://randomuser.me/api/portraits/men/52.jpg",
     availability: "Available Today",
