@@ -33,9 +33,19 @@ export default function SummaryCharts({ summary, statistics }) {
         </div>
         <div className="rounded-xl bg-slate-50 p-3">
           <div className="text-[11px] text-slate-600">Balance</div>
-          <div className="text-lg font-semibold text-slate-900">
-            ₹{summary?.balance?.toFixed ? summary.balance.toFixed(2) : summary?.balance ?? 0}
-          </div>
+          <div
+            title={`₹${summary?.balance?.toFixed ? summary.balance.toFixed(2) : summary?.balance ?? 0}`}
+            className={`text-lg font-semibold ${
+            summary?.balance < 0 ? "text-slate-400" : "text-slate-900"
+            }`}
+          >
+          ₹
+          {summary?.balance < 0
+          ? "0.00"
+          : summary?.balance?.toFixed
+          ? summary.balance.toFixed(2)
+          : summary?.balance ?? 0}
+        </div>
         </div>
       </div>
 
