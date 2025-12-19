@@ -17,18 +17,25 @@ export default function Timeline({ items = [] }) {
 
     <div className="h-[260px]">
       <Chrono
-        items={chronoItems}
-        mode="HORIZONTAL"
-        theme={{
-          primary: "#3b82f6",   
-          secondary: "#60a5fa",
-          cardBgColor: "#ffffff",
-          cardForeColor: "#1f2937",
-        }}
-        cardHeight={120}
-        slideShow={false}
-        disableToolbar
-      />
+  items={chronoItems}
+  mode="HORIZONTAL"
+  theme={{
+    primary: "#60a5fa",
+    secondary: "#3b82f6",
+    cardBgColor: "#1f2937",      
+    cardForeColor: "#f9fafb",    
+    titleColor: "#f9fafb",
+    titleColorActive: "#ffffff",
+  }}
+  fontSizes={{
+    title: "0.85rem",
+    cardTitle: "1rem",
+    cardSubtitle: "0.8rem",
+    cardText: "0.9rem",
+  }}
+  cardHeight={140}
+  disableToolbar
+/>
     </div>
   </div>
 );
