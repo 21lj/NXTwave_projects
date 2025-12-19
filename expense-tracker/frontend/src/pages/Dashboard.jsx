@@ -127,10 +127,16 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="space-y-4">
-          <SummaryCharts summary={summary} statistics={statistics} />
-          <Timeline items={items} />
-        </div>
+        <div className="flex flex-col gap-8">
+  <section>
+    <SummaryCharts summary={summary} statistics={statistics} />
+  </section>
+
+  <section className="max-w-full overflow-hidden">
+    <Timeline items={items} />
+  </section>
+</div>
+
       </div>
     </div>
   );
