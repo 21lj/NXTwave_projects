@@ -1,3 +1,6 @@
+import React from "react";
+import { Chrono } from "react-chrono";
+
 export default function Timeline({ items = [] }) {
   const chronoItems = items.slice(0, 12).map((it) => ({
     title: new Date(it.date).toLocaleDateString(),
