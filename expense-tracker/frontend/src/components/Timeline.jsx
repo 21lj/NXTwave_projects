@@ -1,87 +1,75 @@
+import { Chrono } from "react-chrono";
 import { useEffect, useState } from "react";
 
 export default function Timeline({ items = [] }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
   if (!mounted || items.length === 0) return null;
 
-  const grouped = items.slice(0, 15).reduce((acc, item) => {
-    const key = new Date(item.date).toDateString();
-    acc[key] = acc[key] || [];
-    acc[key].push(item);
-    return acc;
-  }, {});
+  const chronoItems = items.slice(0, 12).map((it) => ({
+    title: new Date(it.date).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    cardTitle: it.title,
+    cardSubtitle: it.category,
+    cardDetailedText: (
+      <div className="space-y-3">
+        <div className="flex items-center gap-3">
+          <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
+            {it.type}
+          </span>
+          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            ₹{it.amount.toLocaleString("en-IN")}
+          </span>
+        </div>
+
+        {it.note && (
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            {it.note}
+          </p>
+        )}
+      </div>
+    ),
+  }));
 
   return (
-    <section className="mt-8 w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Recent Activity
-        </h3>
+    <div className="mt-10 w-full rounded-3xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 dark:ring-white/10">
+      <div className="mb-6 flex items-center justify-between">
+        <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+          Activity Timeline
+        </h4>
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          {items.length} entries
+          Last 12 entries
         </span>
-      </header>
-
-      <div className="divide-y divide-gray-100 dark:divide-gray-800">
-        {Object.entries(grouped).map(([date, entries]) => (
-          <div key={date} className="px-6 py-4">
-            <p className="mb-3 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-              {date}
-            </p>
-
-            <ul className="space-y-3">
-              {entries.map((it, idx) => (
-                <li
-                  key={idx}
-                  className="group flex items-start gap-4 rounded-xl p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-                >
-                  {/* Indicator */}
-                  <div
-                    className={`mt-1 h-2.5 w-2.5 rounded-full ${
-                      it.type === "income"
-                        ? "bg-emerald-500"
-                        : "bg-rose-500"
-                    }`}
-                  />
-
-                  {/* Main */}
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-gray-100">
-                          {it.title}
-                        </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {it.category}
-                        </p>
-                      </div>
-
-                      <p
-                        className={`font-semibold ${
-                          it.type === "income"
-                            ? "text-emerald-600 dark:text-emerald-400"
-                            : "text-rose-600 dark:text-rose-400"
-                        }`}
-                      >
-                        {it.type === "income" ? "+" : "-"}₹
-                        {it.amount.toLocaleString("en-IN")}
-                      </p>
-                    </div>
-
-                    {it.note && (
-                      <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                        {it.note}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
-    </section>
+
+      <div className="w-full min-h-[520px]">
+        <Chrono
+          items={chronoItems}
+          mode="VERTICAL_ALTERNATING"
+          hideControls
+          disableToolbar
+          cardHeight={170}
+          theme={{
+            primary: "linear-gradient(180deg, #6366f1, #22d3ee)",
+            secondary: "#22d3ee",
+            cardBgColor: "rgba(17,24,39,0.6)",
+            cardForeColor: "#e5e7eb",
+            titleColor: "#9ca3af",
+            titleColorActive: "#818cf8",
+          }}
+          fontSizes={{
+            cardTitle: "0.95rem",
+            cardSubtitle: "0.8rem",
+            cardText: "0.85rem",
+            title: "0.8rem",
+          }}
+        />
+      </div>
+    </div>
   );
 }
