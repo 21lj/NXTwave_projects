@@ -1,78 +1,83 @@
+import React, { useMemo } from "react";
 import { Chrono } from "react-chrono";
-import { useEffect, useState } from "react";
+
+const MemoChrono = React.memo(Chrono);
 
 export default function Timeline({ items = [] }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted || items.length === 0) return null;
-
-  const chronoItems = items.slice(0, 12).map((it) => ({
-    title: new Date(it.date).toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }),
-    cardTitle: it.title,
-    cardSubtitle: it.category,
-    cardDetailedText: (
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
-            {it.type}
-          </span>
-
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            ₹{it.amount?.toLocaleString("en-IN")}
-          </span>
-        </div>
-
-        {it.note?.trim() && (
-          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-            {it.note}
-          </p>
-        )}
-      </div>
-    ),
-  }));
+  const chronoItems = useMemo(() => {
+    return [...items]
+      .sort(
+        (a, b) =>
+          new Date(a?.date || 0).getTime() -
+          new Date(b?.date || 0).getTime()
+      )
+      .slice(-10)
+      .map((it) => ({
+        title: new Date(it.date || Date.now()).toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        cardTitle: it.title || "Untitled",
+        cardSubtitle: it.category || "Uncategorized",
+        cardDetailedText: [
+          `Type: ${it.type}`,
+          `Amount: ₹${Number(it.amount || 0).toFixed(2)}`,
+          it.note && `Note: ${it.note}`,
+        ].filter(Boolean),
+      }));
+  }, [items]);
 
   return (
-    <div className="mt-10 w-full rounded-3xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 dark:ring-white/10">
-      <div className="mb-6 flex items-center justify-between">
-        <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-          Activity Timeline
-        </h4>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          Last 12 entries
-        </span>
-      </div>
+    <section className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 transition-all duration-300">
+      {/* Header */}
+      <header className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h4 className="text-xs font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+            Activity Timeline
+          </h4>
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">
+            Recent Transactions
+          </p>
+        </div>
+        <div className="h-3 w-3 animate-pulse rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)]" />
+      </header>
 
-      <div className="w-full min-h-[520px]">
-        <Chrono
-          items={chronoItems}
-          mode="VERTICAL_ALTERNATING"
-          hideControls
-          disableToolbar
-          cardHeight={170}
-          theme={{
-            primary: "linear-gradient(180deg, #6366f1, #22d3ee)",
-            secondary: "#22d3ee",
-            cardBgColor: "rgba(17,24,39,0.6)",
-            cardForeColor: "#e5e7eb",
-            titleColor: "#9ca3af",
-            titleColorActive: "#818cf8",
-          }}
-          fontSizes={{
-            cardTitle: "0.95rem",
-            cardSubtitle: "0.8rem",
-            cardText: "0.85rem",
-            title: "0.8rem",
-          }}
-        />
-      </div>
-    </div>
+      {chronoItems.length === 0 ? (
+        <div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50 dark:border-gray-700 dark:bg-gray-800/30">
+          <span className="text-sm font-medium text-gray-400">
+            No activity recorded yet
+          </span>
+        </div>
+      ) : (
+        <div className="relative min-h-[360px] max-h-[70vh] chrono-container">
+          <MemoChrono
+            items={chronoItems}
+            mode="VERTICAL_ALTERNATING"
+            disableToolbar
+            hideControls
+            scrollable={{ scrollbar: true }}
+            cardHeight={140}
+            theme={{
+              primary: "#6366f1",
+              secondary: "transparent",
+              cardBgColor: "transparent",
+              cardForeColor: "var(--chrono-text)",
+              titleColor: "#8b5cf6",
+            }}
+            fontSizes={{
+              title: "0.75rem",
+              cardTitle: "1rem",
+              cardSubtitle: "0.85rem",
+              cardText: "0.75rem",
+            }}
+            classNames={{
+              card: "my-custom-card",
+              title: "my-custom-title",
+            }}
+          />
+        </div>
+      )}
+    </section>
   );
 }
