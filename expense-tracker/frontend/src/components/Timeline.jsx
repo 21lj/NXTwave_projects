@@ -1,53 +1,43 @@
 import { Chrono } from "react-chrono";
-import { useEffect, useMemo, useState } from "react";
-
-const MAX_ITEMS = 12;
+import { useEffect, useState } from "react";
 
 export default function Timeline({ items = [] }) {
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   if (!mounted || items.length === 0) return null;
 
-  const chronoItems = useMemo(
-    () =>
-      items.slice(0, MAX_ITEMS).map((it) => {
-        const amount = Number(it.amount ?? 0);
+  const chronoItems = items.slice(0, 12).map((it) => ({
+    title: new Date(it.date).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    cardTitle: it.title,
+    cardSubtitle: it.category,
+    cardDetailedText: (
+      <div className="space-y-3">
+        <div className="flex items-center gap-3">
+          <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
+            {it.type}
+          </span>
 
-        return {
-          title: new Date(`${it.date}T00:00:00`).toLocaleDateString("en-IN", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          }),
-          cardTitle: it.title || "Untitled",
-          cardSubtitle: it.category || "Other",
-          cardDetailedText: (
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
-                  {it.type ?? "expense"}
-                </span>
+          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            ₹{it.amount?.toLocaleString("en-IN")}
+          </span>
+        </div>
 
-                <span
-                  className="text-sm font-medium text-gray-500 dark:text-gray-400"
-                  title={`₹${amount.toLocaleString("en-IN")}`}
-                >
-                  ₹{amount.toLocaleString("en-IN")}
-                </span>
-              </div>
-
-              {it.note?.trim() && (
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {it.note}
-                </p>
-              )}
-            </div>
-          ),
-        };
-      }),
-    [items]
-  );
+        {it.note?.trim() && (
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            {it.note}
+          </p>
+        )}
+      </div>
+    ),
+  }));
 
   return (
     <div className="mt-10 w-full rounded-3xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-black/5 dark:ring-white/10">
@@ -56,7 +46,7 @@ export default function Timeline({ items = [] }) {
           Activity Timeline
         </h4>
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          Last {MAX_ITEMS} entries
+          Last 12 entries
         </span>
       </div>
 
