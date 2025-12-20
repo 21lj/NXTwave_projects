@@ -8,33 +8,37 @@ export default function Timeline({ items = [] }) {
 
   if (!mounted || items.length === 0) return null;
 
- const chronoItems = items.slice(0, 12).map((it) => ({
-  title: new Date(it.date).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }),
-  cardTitle: it.title,
-  cardSubtitle: it.category,
-  cardDetailedText: (
-    <div className="space-y-3">
-      <div className="flex items-center gap-3">
-        <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
-          {it.type}
-        </span>
-        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-          ₹{it.amount.toLocaleString("en-IN")}
-        </span>
-      </div>
+ const chronoItems = items
+  .slice() 
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
+  .slice(0, 12)
+  .map((it) => ({
+    title: new Date(it.date + "T00:00:00").toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    cardTitle: it.title,
+    cardSubtitle: it.category,
+    cardDetailedText: (
+      <div className="space-y-3">
+        <div className="flex items-center gap-3">
+          <span className="px-2.5 py-0.5 text-xs rounded-full bg-indigo-500/10 text-indigo-400 ring-1 ring-indigo-500/20">
+            {it.type}
+          </span>
+          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            ₹{Number(it.amount).toLocaleString("en-IN")}
+          </span>
+        </div>
 
-      {it.note?.trim() && (
-        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-          {it.note}
-        </p>
-      )}
-    </div>
-  ),
-}));
+        {it.note?.trim() && (
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            {it.note}
+          </p>
+        )}
+      </div>
+    ),
+  }));
 
 
   return (
