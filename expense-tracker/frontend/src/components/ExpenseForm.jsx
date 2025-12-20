@@ -22,7 +22,7 @@ export default function ExpenseForm({ onCreate, defaultValues }) {
   const emptyDefaults = useMemo(
     () => ({
       title: '',
-      amount: 0,
+      amount: '',
       type: 'expense',
       category: 'other',
       note: '',
