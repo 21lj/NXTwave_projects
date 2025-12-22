@@ -70,7 +70,7 @@ This separation ensures scalability, readability, and testability.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/21lijo/plp-2.git
+git clone https://github.com/21lj/plp-2.git
 cd Appscrip-task-yourname
 ```
 
