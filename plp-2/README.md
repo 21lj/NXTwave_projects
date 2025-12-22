@@ -10,7 +10,7 @@ This project demonstrates front-end fundamentals: semantic HTML, responsive layo
 ## Live Demo
 
 🔗 **Live Site:**
-[https://appscrip-plp-yourname.netlify.app](https://appscrip-plp-yourname.netlify.app)
+[Product_Listing_Page](https://plp-2.onrender.com/)
 
 
 ---
